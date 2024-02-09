@@ -1,7 +1,7 @@
 import MercadoPagoConfig, { Preference } from "mercadopago";
 import { NextApiRequest, NextApiResponse } from "next";
 
-const cliente = new MercadoPagoConfig({
+export const cliente = new MercadoPagoConfig({
    accessToken: process.env.MP_TEST_ACCESS_TOKEN!,
 });
 const preferencia = new Preference(cliente);
