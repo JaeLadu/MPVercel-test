@@ -17,7 +17,7 @@ export default async function handler(
          body: {
             external_reference: "Testing Testing",
             items: items,
-            notification_url: `https://${process.env.VERCEL_URL}/api/mercadopago`,
+            notification_url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/mercadopago`,
          },
       });
       res.send(MPResponse);
