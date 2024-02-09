@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getMerchantOrder } from "../../lib/mercadopago";
+import { getMerchantOrder } from "src/lib/mercadopago";
 
 export default async function handler(
    req: NextApiRequest,
