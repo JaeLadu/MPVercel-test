@@ -11,7 +11,7 @@ export default async function handler(
 ) {
    const { body, query } = req;
    const { id, topic } = query;
-   const MO = await merchantOrder.get(id as unknown as MerchantOrderGetData);
-   console.warn(body, query, MO);
+   //    const MO = await merchantOrder.get(id as unknown as MerchantOrderGetData);
+   console.warn(body, query);
    return res.status(200).end();
 }
