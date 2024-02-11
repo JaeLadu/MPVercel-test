@@ -4,15 +4,14 @@ import { getMerchantOrder } from "src/lib/mercadopago";
 import { reqVerbsHandler } from "src/lib/middlewares";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-   const { body, query } = req;
+   const { query } = req;
    const { id, topic } = query;
    if (id && topic == "merchant_order") {
-      const MO = await getMerchantOrder(id.toString());
-      const response = await updateOrderStatus(
-         MO.external_reference,
-         MO.order_status
+      const merchantOrder = await getMerchantOrder(id.toString());
+      await updateOrderStatus(
+         merchantOrder.external_reference,
+         merchantOrder.order_status
       );
-      console.warn({ body }, { query }, { MO }, { response });
    }
    return res.status(200).end();
 }

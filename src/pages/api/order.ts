@@ -1,17 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { createOrder } from "src/controllers/orders-controller";
 import { createMPPreference } from "src/lib/mercadopago";
 import { checkToken, reqVerbsHandler } from "src/lib/middlewares";
+import { Order } from "src/models/order";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-   console.warn("handler");
-   const { body } = req;
-   const { items } = body;
-   if (items) {
-      const DBOrder = await createOrder(items);
+   const { query } = req;
+   const { productIds } = query;
+   if (productIds) {
+      const DBOrder = await Order.create(JSON.parse(productIds as string));
       const MPURL = await createMPPreference({
          orderId: DBOrder.id,
-         productos: items,
+         productos: DBOrder.getData().items,
       });
       res.send(MPURL);
    } else {

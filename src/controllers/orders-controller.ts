@@ -1,10 +1,6 @@
 import { firestoreDB } from "src/lib/firestore";
-
-export async function createOrder(data) {
-    console.warn('createOrder')
-   return await firestoreDB.collection("orders").add({ data });
-}
+const ordersRef = firestoreDB.collection("orders");
 
 export async function updateOrderStatus(id: string, status: string) {
-   await firestoreDB.collection("orders").doc(id).update({ status });
+   await ordersRef.doc(id).update({ status });
 }

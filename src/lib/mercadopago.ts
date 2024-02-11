@@ -1,4 +1,5 @@
 import MercadoPagoConfig, { MerchantOrder, Preference } from "mercadopago";
+import { Product } from "src/models/product";
 
 const cliente = new MercadoPagoConfig({
    accessToken: process.env.MP_TEST_ACCESS_TOKEN!,
@@ -9,9 +10,8 @@ const merchantOrder = new MerchantOrder(cliente);
 
 export async function createMPPreference(data: {
    orderId: string;
-   productos: any;
+   productos: Product[];
 }) {
-   console.warn("createMPPreference");
    const response = await preferencia.create({
       body: {
          external_reference: data.orderId,
