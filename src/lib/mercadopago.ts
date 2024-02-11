@@ -11,6 +11,7 @@ export async function createMPPreference(data: {
    orderId: string;
    productos: any;
 }) {
+   console.warn("createMPPreference");
    const response = await preferencia.create({
       body: {
          external_reference: data.orderId,

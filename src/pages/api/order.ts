@@ -4,6 +4,7 @@ import { createMPPreference } from "src/lib/mercadopago";
 import { checkToken, reqVerbsHandler } from "src/lib/middlewares";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+   console.warn("handler");
    const { body } = req;
    const { items } = body;
    if (items) {
