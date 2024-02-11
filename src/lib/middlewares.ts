@@ -60,9 +60,6 @@ export async function reqVerbsHandler(
 export async function checkToken(req: NextApiRequest, res: NextApiResponse) {
    console.warn("Check token");
    const token = req.headers.authorization?.split(" ")[1];
-   if (process.env.NEXT_PUBLIC_VERCEL_ENV == "production") {
-      req.body = JSON.parse(req.body);
-   }
    const { email } = req.body;
    console.warn({ email });
    try {
