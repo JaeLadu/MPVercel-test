@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { updateOrderStatus } from "src/controllers/orders-controller";
 import { getMerchantOrder } from "src/lib/mercadopago";
 
 export default async function handler(
@@ -7,7 +8,13 @@ export default async function handler(
 ) {
    const { body, query } = req;
    const { id, topic } = query;
-   const MO = await getMerchantOrder(id.toString());
-   console.warn(body, query, MO);
+   if (id && topic == "merchant_order") {
+      const MO = await getMerchantOrder(id.toString());
+      const response = await updateOrderStatus(
+         MO.external_reference,
+         MO.status
+      );
+      console.warn({ body }, { query }, { MO }, { response });
+   }
    return res.status(200).end();
 }
