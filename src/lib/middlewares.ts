@@ -64,6 +64,7 @@ export async function checkToken(req: NextApiRequest, res: NextApiResponse) {
       req.body = JSON.parse(req.body);
    }
    const { email } = req.body;
+   console.warn({ email });
    try {
       if (!token) {
          throw Error(
