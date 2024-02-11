@@ -18,6 +18,7 @@ export async function reqVerbsHandler(
    res: NextApiResponse,
    verbsObj: verbsObj
 ) {
+   console.warn("reqVerbs");
    const requestMethod = req.method!.toLowerCase();
    const isMethodAllowed = Object.hasOwn(verbsObj, requestMethod);
 
@@ -25,6 +26,7 @@ export async function reqVerbsHandler(
       res.status(405).end("Method not allowed");
       return;
    }
+   console.warn("Method allowed");
 
    const callback: Function = verbsObj[requestMethod].callback;
    const middleWares: Function[] | Promise<Function>[] =
@@ -56,6 +58,7 @@ export async function reqVerbsHandler(
 }
 
 export async function checkToken(req: NextApiRequest, res: NextApiResponse) {
+   console.warn("Check token");
    const token = req.headers.authorization?.split(" ")[1];
    if (process.env.NEXT_PUBLIC_VERCEL_ENV == "production") {
       req.body = JSON.parse(req.body);
